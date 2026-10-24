@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:17
+    container_name: sorveteria-db
+    environment:
+      POSTGRES_DB: sorveteria
+      POSTGRES_USER: sorveteria
+      POSTGRES_PASSWORD: sorveteria123
+    ports:
+      - "5433:5432"
+    volumes:
+      - sorveteria-dados:/var/lib/postgresql/data
+
+volumes:
+  sorveteria-dados:
