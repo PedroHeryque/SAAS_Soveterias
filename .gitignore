@@ -39,3 +39,6 @@ out/
 
 ### banco ###
 application-local.properties
+
+
+*.log
