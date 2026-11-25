@@ -11,4 +11,10 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
     List<Categoria> findByLojaId(Long lojaId);
 
     Optional<Categoria>findByIdAndLojaId(Long id,Long lojaId);
+
+    static boolean existsByLojaIdAndNomeIgnoreCase(Long lojaId, String nome) {
+        return false;
+    }
+
+    boolean existsByLojaIdAndNomeIgnoreCaseAndIdNot(Long lojaId, String nome , Long id);
 }
