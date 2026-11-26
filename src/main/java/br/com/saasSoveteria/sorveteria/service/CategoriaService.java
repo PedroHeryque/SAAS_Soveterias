@@ -49,4 +49,11 @@ public class CategoriaService {
         return categoriaRepository.findByIdAndLojaId(id, lojaId)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Categoria não encontrada."));
     }
+    @Transactional
+    public Categoria desativar(Long id , Long lojaId){
+        Categoria categoria = buscar(id, lojaId);
+        categoria.setAtivo(false);
+        return categoria;
+    }
+
 }

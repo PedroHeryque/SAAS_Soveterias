@@ -34,7 +34,12 @@ public class CategoriaController {
     @GetMapping("/{id}")
     public CategoriaResponse buscar(@RequestHeader("X-Loja-Id") long lojaId,
                                     @PathVariable long id){
-        return CategoriaResponse.de(categoriaService.buscar(lojaId, id));
+        return CategoriaResponse.de(categoriaService.buscar(id, lojaId));
+    }
+    @PatchMapping ( "/{id}/desativar")
+    public CategoriaResponse desativar(@RequestHeader("X-Loja-Id") Long lojaId,
+                                       @PathVariable Long id){
+        return CategoriaResponse.de(categoriaService.desativar(id, lojaId));
     }
 
 
