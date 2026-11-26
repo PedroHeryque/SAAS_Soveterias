@@ -27,7 +27,7 @@ public class CategoriaService {
     @Transactional
     public Categoria criar(Long lojaId, String nome) {
         String limpo = validarNome(nome);
-        if (CategoriaRepository.existsByLojaIdAndNomeIgnoreCase(lojaId, limpo)) {
+        if (categoriaRepository.existsByLojaIdAndNomeIgnoreCase(lojaId, limpo)) {
             throw new RegraDeNegocioException("Já existe uma categoria com esse nome.");
         }
         return categoriaRepository.save(new Categoria(lojaId, limpo));
