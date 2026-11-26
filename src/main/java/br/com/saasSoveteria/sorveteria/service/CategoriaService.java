@@ -55,5 +55,11 @@ public class CategoriaService {
         categoria.setAtivo(false);
         return categoria;
     }
+    @Transactional
+    public Categoria reativar(Long id , Long lojaId){
+        Categoria categoria = buscar(id,lojaId);
+        categoria.setAtivo(true);
+        return categoria;
+    }
 
 }

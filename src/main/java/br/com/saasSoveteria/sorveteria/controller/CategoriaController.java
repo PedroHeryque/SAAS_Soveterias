@@ -41,6 +41,11 @@ public class CategoriaController {
                                        @PathVariable Long id){
         return CategoriaResponse.de(categoriaService.desativar(id, lojaId));
     }
+    @PatchMapping("/{id}/reativar")
+    public CategoriaResponse reativar(@RequestHeader("X-Loja-Id") Long lojaId,
+                                      @PathVariable Long id){
+        return CategoriaResponse.de(categoriaService.reativar(id,lojaId));
+    }
 
 
 }
