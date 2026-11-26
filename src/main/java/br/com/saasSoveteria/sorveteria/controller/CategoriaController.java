@@ -5,6 +5,7 @@ import br.com.saasSoveteria.sorveteria.dto.CategoriaResponse;
 import br.com.saasSoveteria.sorveteria.model.Categoria;
 import br.com.saasSoveteria.sorveteria.repository.CategoriaRepository;
 import br.com.saasSoveteria.sorveteria.service.CategoriaService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class CategoriaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CategoriaResponse criar(@RequestHeader("X-Loja-Id") Long lojaId,
-                                   @RequestBody CategoriaRequest request) {
+                                   @Valid @RequestBody CategoriaRequest request) {
         return CategoriaResponse.de(categoriaService.criar(lojaId, request.nome()));
     }
     @GetMapping("/{id}")
@@ -51,6 +52,7 @@ public class CategoriaController {
                                       @PathVariable Long id, @RequestBody CategoriaRequest request){
         return CategoriaResponse.de(categoriaService.renomear(id, lojaId, request.nome()));
     }
+
 
 
 }
