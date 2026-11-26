@@ -22,4 +22,5 @@ public class TratadoraDeErros {
         return new ErroResponse(e.getMessage());
     }
 
+
 }

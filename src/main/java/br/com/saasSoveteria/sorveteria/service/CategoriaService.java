@@ -2,6 +2,7 @@ package br.com.saasSoveteria.sorveteria.service;
 
 import java.util.List;
 
+import br.com.saasSoveteria.sorveteria.exception.RecursoNaoEncontradoException;
 import br.com.saasSoveteria.sorveteria.exception.RegraDeNegocioException;
 import br.com.saasSoveteria.sorveteria.model.Categoria;
 import br.com.saasSoveteria.sorveteria.repository.CategoriaRepository;
@@ -42,5 +43,10 @@ public class CategoriaService {
             throw new RegraDeNegocioException("O nome pode ter no máximo " + NOME_MAX + " caracteres.");
         }
         return limpo;
+    }
+    @Transactional(readOnly = true)
+    public Categoria buscar(Long id, Long lojaId) {
+        return categoriaRepository.findByIdAndLojaId(id, lojaId)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Categoria não encontrada."));
     }
 }

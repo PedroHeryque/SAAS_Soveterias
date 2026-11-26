@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/categorias")
+
 public class CategoriaController {
     private final CategoriaService  categoriaService;
 
@@ -30,5 +31,11 @@ public class CategoriaController {
                                    @RequestBody CategoriaRequest request) {
         return CategoriaResponse.de(categoriaService.criar(lojaId, request.nome()));
     }
+    @GetMapping("/{id}")
+    public CategoriaResponse buscar(@RequestHeader("X-Loja-Id") long lojaId,
+                                    @PathVariable long id){
+        return CategoriaResponse.de(categoriaService.buscar(lojaId, id));
+    }
+
 
 }
