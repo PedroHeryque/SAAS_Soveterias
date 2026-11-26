@@ -61,5 +61,14 @@ public class CategoriaService {
         categoria.setAtivo(true);
         return categoria;
     }
-
-}
+    @Transactional
+    public Categoria renomear(Long id , Long lojaId, String nome) {
+        Categoria categoria = buscar(id, lojaId);
+        String limpo = validarNome(nome);
+            if (categoriaRepository.existsByLojaIdAndNomeIgnoreCaseAndIdNot(lojaId, limpo, id)) {
+                throw new RegraDeNegocioException("Já existe uma categoria com esse nome.");
+            }
+            categoria.setNome(limpo);
+            return categoria;
+        }
+    }

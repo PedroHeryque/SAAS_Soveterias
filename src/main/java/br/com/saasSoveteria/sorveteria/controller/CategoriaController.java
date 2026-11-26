@@ -46,6 +46,11 @@ public class CategoriaController {
                                       @PathVariable Long id){
         return CategoriaResponse.de(categoriaService.reativar(id,lojaId));
     }
+    @PatchMapping("/{id}/renomear")
+    public CategoriaResponse renomear(@RequestHeader ("X-Loja-Id") Long lojaId,
+                                      @PathVariable Long id, @RequestBody CategoriaRequest request){
+        return CategoriaResponse.de(categoriaService.renomear(id, lojaId, request.nome()));
+    }
 
 
 }
