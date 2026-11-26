@@ -2,6 +2,7 @@ package br.com.saasSoveteria.sorveteria.exception;
 
 
 import br.com.saasSoveteria.sorveteria.dto.ErroResponse;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class TratadoraDeErros {
+public class TratadoraDeErrosException {
 
     @ExceptionHandler(RegraDeNegocioException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -21,6 +22,12 @@ public class TratadoraDeErros {
     public ErroResponse naoEncontrado(RecursoNaoEncontradoException e){
         return new ErroResponse(e.getMessage());
     }
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus (HttpStatus.BAD_REQUEST)
+    public ErroResponse conflitoDeDados(DataIntegrityViolationException e){
+        return new ErroResponse("Não foi possível salvar: os dados conflitam com um registro existente.");
+    }
+
 
 
 }
